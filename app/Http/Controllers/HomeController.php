@@ -16,8 +16,8 @@ class HomeController extends Controller
 
     public function index()
     {
-        return view('home',[
-            'tweets' => Tweet::all()
-        ]);
+        $tweets = Tweet::latest()->get();
+
+        return view('home',compact('tweets'));
     }
 }
