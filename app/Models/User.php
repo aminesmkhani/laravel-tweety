@@ -53,4 +53,9 @@ class User extends Authenticatable
     {
         return Tweet::where('user_id',$this->id)->latest()->get();
     }
+
+    public function follows()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
