@@ -1,6 +1,6 @@
 <div class="flex p-4 border-b border-b-gray-400">
     <div class="mr-2 flex-shrink-0">
-        <img src="https://i.pravatar.cc/50?u={{$tweet->user->email}}" class="rounded-full mr-2" alt="">
+        <img src="{{auth()->user()->avatar}}" class="rounded-full mr-2" alt="">
     </div>
 
     <div>
