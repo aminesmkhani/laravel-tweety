@@ -6,7 +6,7 @@ use App\Models\Tweet;
 use App\Http\Requests\StoreTweetRequest;
 use App\Http\Requests\UpdateTweetRequest;
 
-class TweetController extends Controller
+class TweetsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -28,15 +28,15 @@ class TweetController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreTweetRequest  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(StoreTweetRequest $request)
     {
-        //
+        Tweet::create([
+            'user_id'  => auth()->id(),
+            'body' => $request('body')
+        ]);
+
+        return redirect('/home');
     }
 
     /**
