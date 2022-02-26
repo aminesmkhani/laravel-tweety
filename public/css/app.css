@@ -589,7 +589,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-radius: 9999px;
 }
 .rounded-lg {
-  border-radius: 0.5rem;
+  border-radius: 1.25rem;
 }
 .border {
   border-width: 1px;
