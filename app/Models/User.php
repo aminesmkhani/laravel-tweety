@@ -18,6 +18,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'username',
         'name',
         'email',
         'password',
@@ -58,8 +59,7 @@ class User extends Authenticatable
         $friends = $this->follows()->pluck('id');
 
         return Tweet::whereIn('user_id',$friends)
-            ->orWhere('user_id',$this->id)
-            ->latest()->get();
+            ->orWhere('user_id',$this->id)            ->latest()->get();
     }
 
     public function tweets()
@@ -70,12 +70,12 @@ class User extends Authenticatable
 
     public function getRouteKeyName()
     {
-        return 'name';
+        return 'username';
     }
 
     public function path($append = '')
     {
-      $path = route('profile',$this->name);
+      $path = route('profile',$this->username);
       return $append ? "{$path}/{$append}" : $path;
     }
 
