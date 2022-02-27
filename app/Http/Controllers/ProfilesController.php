@@ -17,4 +17,9 @@ class ProfilesController extends Controller
         $this->authorize('edit', $user);
         return view('profiles.edit',compact('user'));
     }
+
+    public function update()
+    {
+        return 'enjoy!';
+    }
 }
