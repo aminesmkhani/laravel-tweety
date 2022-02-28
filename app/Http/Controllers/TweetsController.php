@@ -17,13 +17,6 @@ class TweetsController extends Controller
         ]);
     }
 
-
-    public function create()
-    {
-        //
-    }
-
-
     public function store(StoreTweetRequest $request)
     {
         Tweet::create([
@@ -32,27 +25,5 @@ class TweetsController extends Controller
         ]);
 
         return redirect()->route('home');
-    }
-
-    public function show(Tweet $tweet)
-    {
-        //
-    }
-
-
-    public function edit(Tweet $tweet)
-    {
-        //
-    }
-
-
-    public function update(UpdateTweetRequest $request, Tweet $tweet)
-    {
-        //
-    }
-
-    public function destroy(Tweet $tweet)
-    {
-        //
     }
 }

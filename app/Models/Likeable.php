@@ -2,29 +2,39 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
+
 trait Likeable
 {
-
-    public function likes()
+    public function scopeWithLikes(Builder $query)
     {
-        return $this->hasMany(Like::class);
+        $query->leftJoinSub(
+            'select tweet_id, sum(liked) likes, sum(!liked) dislikes from likes group by tweet_id',
+            'likes',
+            'likes.tweet_id',
+            'tweets.id'
+        );
     }
 
-    public function isDisLikedBy(User $user)
+    public function isLikedBy(User $user)
     {
-        return (bool)$user->likes
+        return (bool) $user->likes
+            ->where('tweet_id', $this->id)
+            ->where('liked', true)
+            ->count();
+    }
+
+    public function isDislikedBy(User $user)
+    {
+        return (bool) $user->likes
             ->where('tweet_id', $this->id)
             ->where('liked', false)
             ->count();
     }
 
-    public function like($user = null, $liked = true)
+    public function likes()
     {
-        $this->likes()->updateOrCreate([
-            'user_id' => $user ? $user->id : auth()->id(),
-        ], [
-            'liked' => $liked
-        ]);
+        return $this->hasMany(Like::class);
     }
 
     public function dislike($user = null)
@@ -32,11 +42,15 @@ trait Likeable
         return $this->like($user, false);
     }
 
-    public function isLikedBy(User $user)
+    public function like($user = null, $liked = true)
     {
-        return (bool)$user->likes
-            ->where('tweet_id', $this->id)
-            ->where('liked', true)
-            ->count();
+        $this->likes()->updateOrCreate(
+            [
+                'user_id' => $user ? $user->id : auth()->id(),
+            ],
+            [
+                'liked' => $liked,
+            ]
+        );
     }
 }
