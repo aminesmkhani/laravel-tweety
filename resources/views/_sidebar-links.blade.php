@@ -6,5 +6,10 @@
     <li><a href="#" class="font-semibold text-lg mb-4 block">Bookmarks</a></li>
     <li><a href="#" class="font-semibold text-lg mb-4 block">Lists</a></li>
     <li><a href="{{route('profile',auth()->user())}}" class="font-semibold text-lg mb-4 block">Profile</a></li>
-    <li><a href="#" class="font-semibold text-lg mb-4 block">More</a></li>
+    <li>
+        <form method="POST" action="/logout">
+            @csrf
+            <button class="font-bold text-lg">Logout</button>
+        </form>
+    </li>
 </ul>
