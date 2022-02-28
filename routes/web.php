@@ -25,14 +25,15 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function (){
     Route::get('/tweets',[TweetsController::class,'index'])->name('home');
     Route::post('/tweets',[TweetsController::class,'store'])->name('store.tweets');
-    Route::post('/profiles/{user}/follow',[FollowsController::class,'store']);
+    Route::post('/profiles/{user}/follow',[FollowsController::class,'store'])->name('follow');
     Route::get('profiles/{user}/edit',[ProfilesController::class,'edit'])->middleware('can:edit,user');
 //    Route::patch('/profiles/{user:username}',[ProfilesController::class,'update'])->name('profile.update');
+    Route::get('/explore',[ExploreController::class,'index']);
+
 });
 
 
 Route::get('/profiles/{user:username}',[ProfilesController::class,'show'])->name('profile');
-Route::get('/explore',[ExploreController::class,'index']);
 
 
 Auth::routes();
