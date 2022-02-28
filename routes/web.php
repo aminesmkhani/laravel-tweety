@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ExploreController;
 use App\Http\Controllers\FollowsController;
 use App\Http\Controllers\ProfilesController;
 use App\Http\Controllers\TweetsController;
@@ -31,6 +32,7 @@ Route::middleware('auth')->group(function (){
 
 
 Route::get('/profiles/{user:username}',[ProfilesController::class,'show'])->name('profile');
+Route::get('/explore',[ExploreController::class,'index']);
 
 
 Auth::routes();
