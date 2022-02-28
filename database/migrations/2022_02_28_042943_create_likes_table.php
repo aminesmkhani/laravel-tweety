@@ -19,6 +19,8 @@ return new class extends Migration
             $table->foreignId('tweet_id')->constrained()->onDelete('cascade');
             $table->boolean('liked')->comment('1: liked | 0: dislike');
             $table->timestamps();
+
+            $table->unique('user_id','tweet_id');
         });
     }
 
